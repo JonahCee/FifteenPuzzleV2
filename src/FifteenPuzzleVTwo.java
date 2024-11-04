@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-
+//Comment
 public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
     JButton[] buttons = new JButton[16]; // 15 brickor + tom plats
     JPanel gridPanel;
