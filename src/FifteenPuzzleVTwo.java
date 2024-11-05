@@ -11,12 +11,12 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
     private JButton newGameButton;
     private Font buttonFont = new Font("Arial", Font.BOLD, 20);
 
-    //Definiera färger för brickorna
+    // Definiera färger för brickorna
     Color tileColor = new Color(70, 130, 180);
     Color textColor = Color.WHITE;
     Color emptyTileColor = Color.LIGHT_GRAY;
 
-        //Konstruktor
+        // Konstruktor
     protected FifteenPuzzleVTwo() {
         setTitle("15-spel");
         setSize(400, 450);
@@ -37,7 +37,7 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         //(viktig)
         setVisible(true);
     }
-    //Skapar och ställer in knappar
+    // Skapar och ställer in knappar
     private void initializeTiles() {
         for (int i = 0; i < 15; i++) {
             buttons[i] = new JButton(String.valueOf(i + 1));
@@ -61,7 +61,7 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         gridPanel.add(buttons[15]);
     }
 
-    //Metod för att blanda brickorna
+    // Metod för att blanda brickorna
     private void shuffleTiles() {
         ArrayList<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= 15; i++) {
@@ -82,14 +82,14 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         buttons[15].setBackground(emptyTileColor); // Sätt tom bakgrundsfärg
     }
 
-    //Metod som kallas när knapp klickas
+    // Metod som kallas när knapp klickas
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
         int clickedIndex = -1;
         int emptyIndex = -1;
 
-        //Hitta index för klickade knappen och tomma knappen
+        // Hitta index för klickade knappen och tomma knappen
         for (int i = 0; i < 16; i++) {
             if (buttons[i] == clickedButton) {
                 clickedIndex = i;
@@ -99,30 +99,30 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
             }
         }
 
-        //Kolla om den klickade knappen ligger intill den tomma (metod nedan)
+        // Kolla om den klickade knappen ligger intill den tomma (metod nedan)
         if (isAdjacent(clickedIndex, emptyIndex)) {
             changeTiles(clickedIndex, emptyIndex); // Byt plats på knapparna
         }
 
-        //Om spelaren vunnit (metod nedan)
+        // Om spelaren vunnit (metod nedan)
         if (checkIfSolved()) {
             JOptionPane.showMessageDialog(this, "Grattis, du vann!");
         }
     }
 
 
-    //Metod för att byta plats mellan två knappar
+    // Metod för att byta plats mellan två knappar
     private void changeTiles(int clickedIndex, int emptyIndex) {
         // Byter text
         buttons[emptyIndex].setText(buttons[clickedIndex].getText());
         buttons[clickedIndex].setText("");
 
-        //Byter bakgrundsfärg
+        // Byter bakgrundsfärg
         buttons[emptyIndex].setBackground(tileColor);
         buttons[clickedIndex].setBackground(emptyTileColor);
 
 
-        //Byter textfärg
+        // Byter textfärg
         buttons[emptyIndex].setForeground(textColor);
         buttons[clickedIndex].setForeground(textColor);
 
@@ -131,7 +131,7 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         buttons[clickedIndex].setEnabled(false);
     }
 
-    //Metod om två knappar är bredvid varandra
+    // Metod om två knappar är bredvid varandra
     private boolean isAdjacent(int index1, int index2) {
         int row1 = index1 / 4;
         int col1 = index1 % 4;
@@ -141,7 +141,7 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         return (Math.abs(row1 - row2) + Math.abs(col1 - col2)) == 1;
     }
 
-    //Bool om brickorna är i rätt ordning
+    // Bool om brickorna är i rätt ordning
     private boolean checkIfSolved() {
         for (int i = 0; i < 15; i++) {
             if (!buttons[i].getText().equals(String.valueOf(i + 1))) {
