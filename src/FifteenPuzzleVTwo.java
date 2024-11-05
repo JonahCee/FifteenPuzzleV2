@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
-    JButton[] buttons = new JButton[16]; // 15 brickor + tom plats
-    JPanel gridPanel;
-    JButton newGameButton;
-    Font buttonFont = new Font("Arial", Font.BOLD, 20);
+   private JButton[] buttons = new JButton[16]; // 15 brickor + tom plats
+    private JPanel gridPanel;
+    private JButton newGameButton;
+    private Font buttonFont = new Font("Arial", Font.BOLD, 20);
 
     // Definiera färger för brickorna
     Color tileColor = new Color(70, 130, 180);
     Color textColor = Color.WHITE;
     Color emptyTileColor = Color.LIGHT_GRAY;
 
+        // Konstruktor
     protected FifteenPuzzleVTwo() {
         setTitle("15-spel");
         setSize(400, 450);
@@ -32,10 +33,8 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         newGameButton.addActionListener(e -> shuffleTiles());
         add(newGameButton, BorderLayout.SOUTH);
 
-        // Initialisera spelets brickor
         initializeTiles();
-
-        // Visa fönstret (viktig)
+        //(viktig)
         setVisible(true);
     }
     //Skapar och ställer in knappar
@@ -83,14 +82,14 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
         buttons[15].setBackground(emptyTileColor); // Sätt tom bakgrundsfärg
     }
 
-    // Metod som kallas när en knapp klickas
+    // Metod som kallas när knapp klickas
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
         int clickedIndex = -1;
         int emptyIndex = -1;
 
-        // Hitta index för den klickade knappen och den tomma knappen
+        // Hitta index för klickade knappen och tomma knappen
         for (int i = 0; i < 16; i++) {
             if (buttons[i] == clickedButton) {
                 clickedIndex = i;
@@ -100,16 +99,17 @@ public class FifteenPuzzleVTwo extends JFrame implements ActionListener {
             }
         }
 
-        // Kolla om den klickade knappen ligger intill den tomma
+        // Kolla om den klickade knappen ligger intill den tomma (metod nedan)
         if (isAdjacent(clickedIndex, emptyIndex)) {
             changeTiles(clickedIndex, emptyIndex); // Byt plats på knapparna
         }
 
-        // Om spelaren vunnit
+        // Om spelaren vunnit (metod nedan)
         if (checkIfSolved()) {
             JOptionPane.showMessageDialog(this, "Grattis, du vann!");
         }
     }
+
 
     // Metod för att byta plats mellan två knappar
     private void changeTiles(int clickedIndex, int emptyIndex) {
